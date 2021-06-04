@@ -1,48 +1,35 @@
 import styles from './App.css'
 import React, { useState, useEffect } from 'react'
-import TextInput from './FastTextInput.js'
-import Panel from './PanelThreeDays.js'
-import OneDayPanel from './PanelOneDay.js'
-import PanelButtons from './PanelArsoData.js'
 import {SocketProvider} from '../hooks/useSocket.js'
-
 import styled, { createGlobalStyle } from 'styled-components'
-var fromXML = require("from-xml").fromXML;
+
+import InputForm from './InputForm.js'
+import InOutContainer from './InOutContainer.js'
+import Settings from './Settings.js'
 
 
-/*const url = "https://meteo.arso.gov.si/uploads/probase/www/fproduct/text/sl/forecast_SI_OSREDNJESLOVENSKA_latest.xml"
-fetch(url)
-    .then(function(response){
-      return response.text();
-    })
-    .then(function(data) {
-      //console.log(data);
-      //let parser = new DOMParser();
-      //xmlDoc = praser.parseFromString(data, 'text/xml');
-      //console.log(xmlDoc);
-      const xml  = fromXML(data);
-      console.log(xml);
-      console.log(xml.data.metData[0].txsyn);
-    });
-*/
+
 const GlobalStyle = createGlobalStyle`
   :root {
-    --mainColor1: #020024;
-    --mainColor2: #30c4ae;
-    --textColor: #757575;
+    --mainColor1: #2F4858; //temno modra
+    --mainColor2: #336699; //svetlej modra
+    --textColor: #FF3E41;  //rdeča
+    --background: white;
   }
   #root {
     height: 100%
   }
   body {
-    font-family: sans-serif;
     height: 100%;
     width: 100%;
-    margin: 0;
+    margin: auto;
     position: relative;
     overflow: scroll;
     font-size: 1.5em;
-    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(48,196,174,1) 100%);
+    background: var(--background);
+
+    //ozadje
+    background-color: var(--mainColor1);
   }
   html {
     height: 100%;
@@ -50,20 +37,80 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
 `
-const AppContainer = styled.div`
-  color: var(--mainColor1);
-  height: 100%;
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(48,196,174,1) 100%);
+const Container = styled.div `
+  height: 400px;
+  width: 300px;
+  margin: auto;
 `
 
-
 export default function App (props) {
+  const [connection, setConnection] = useState({ip: "localhost", port: 6100})
+  const [percent, setPercent] = useState({biden: 50, trump: 50})
+
+  const sendPercent= () => {
+    fetch('http://localhost:4545/percent', {
+      method: 'POST',
+      body: JSON.stringify({ percent }),
+      headers: {'Content-Type': 'application/json'},
+    })
+  } 
+  const sendConnection = () => {
+    fetch('http://localhost:4545/connection', {
+      method: 'POST',
+      body: JSON.stringify({ connection }),
+      headers: {'Content-Type': 'application/json'},
+    })
+  } 
+  const screen_in = () => fetch('http://localhost:4545/screenIN')
+  const screen_out = () => fetch('http://localhost:4545/screenOUT')
+  const mapa_in = () => fetch('http://localhost:4545/mapaIN')
+  const mapa_out = () => fetch('http://localhost:4545/mapaOUT')
+  const totem_in = () => fetch('http://localhost:4545/totemIN')
+  const totem_out = () => fetch('http://localhost:4545/totemOUT')
+
+  useEffect(() => {
+    console.log(percent)
+    sendPercent()
+  }, [percent])
+
+  useEffect(() => {
+    console.log(connection)
+    sendConnection()
+  }, [connection])
+
   return (
     <SocketProvider connection={{ip:'localhost', port:6100}}>
       <GlobalStyle/>
-      <PanelButtons/>
-      <OneDayPanel/>
-      <Panel/>
+      <Container>
+        <Settings 
+          ip={connection.ip}
+          port={connection.port}
+          setIp={(value) => {
+            setConnection({ip: value, port: connection.port})
+          }}
+          setPort={(value) => {
+            setConnection({ip: connection.ip, port: value})
+          }}
+        />
+        <InputForm
+          biden={percent.biden}
+          trump={percent.trump}
+          setBiden={(value) => {
+            setPercent({biden: value, trump: percent.trump})
+          }}
+          setTrump={(value) => {
+            setPercent({trump: value, biden: percent.biden})
+          }}
+        />
+        <InOutContainer 
+          screen_in={screen_in}
+          screen_out={screen_out}
+          mapa_in={mapa_in}
+          mapa_out={mapa_out}
+          totem_in={totem_in}
+          totem_out={totem_out}
+        />
+      </Container>
     </SocketProvider>
-  );
+  )
 }

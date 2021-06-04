@@ -3,25 +3,27 @@ import styled from 'styled-components'
 
 const Button = styled.button`
   flex: 1;
-  width: 80%;
-  background-color: var(--mainColor2);
+  width: 130px;
+  height: 25px;
+  background-color: gray;
   border: none;
-  border-radius: 5px;
-  font-size: 0.5em;
-  font-weight: bold;
-  color: var(--mainColor1);
+  border-radius: 3px;
+  margin: auto;
+  margin-bottom: 10px;
+  font-size: 10px;
+  font-weight: black;
+  color: white;
+  margin-left: 5px;
   outline: none;
-  flex-grow: 1;
-  padding: 5px;
+  display: inline-block;
+  vertical-align: middle;
   cursor: pointer;
 
   &: hover {
-    transform: translateY(-2px);
+    background-color: var(--mainColor1);
   }
   &: active {
-    background-color: var(--mainColor1);
-    color: white;
-    transform: translateY(0px);
+    background-color: black;
   }
 `
 export default Button

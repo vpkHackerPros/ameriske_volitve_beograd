@@ -1,0 +1,105 @@
+export default class VizCommands {
+  crawl_LOAD () {
+    return '0 SCENE*TV3_FAKTOR/PLAYOUT/CRAWL_VIDEO_BACK LOAD\0'
+  }
+  crawl_IN () {
+    return '0 RENDERER*FRONT_LAYER SET_OBJECT SCENE*TV3_FAKTOR/PLAYOUT/CRAWL_VIDEO_BACK\0' + 
+           '0 RENDERER*FRONT_LAYER*STAGE*DIRECTOR*$CRAWL_VIDEO_BACK_IN START\0' +
+           '0 RENDERER*FRONT_LAYER*TREE*$CRAWL_VIDEO_BACK*KEY*DRAW_KEY SET 1 \0'
+  }
+  crawl_SetText (text) {
+    return `0 RENDERER*FRONT_LAYER*TREE*$DEXTER_CRAWL*GEOM*text SET <SET Text "${text }">$Text\0` 
+  }
+  crawl_BUILD () {
+    return '0 RENDERER*FRONT_LAYER*TREE*$DEXTER_CRAWL*GEOM*build INVOKE\0'
+  }
+  crawl_UPDATE () {
+    return '0 RENDERER*FRONT_LAYER*TREE*$DEXTER_CRAWL*GEOM*update INVOKE\0'
+  }
+  crawl_START  () {
+    return '0 RENDERER*FRONT_LAYER*TREE*$DEXTER_CRAWL*GEOM*start INVOKE\0'
+  }
+  crawl_CONTINUE () {
+    return '0 RENDERER*FRONT_LAYER*TREE*$DEXTER_CRAWL*GEOM*cont INVOKE\0'
+  }
+  crawl_STOP () {
+    return '0 RENDERER*FRONT_LAYER*TREE*$DEXTER_CRAWL*GEOM*stop INVOKE\0'
+  }
+  crawl_OUT () {
+    return '0 RENDERER*FRONT_LAYER*STAGE*DIRECTOR*$CRAWL_VIDEO_BACK_OUT START\0'
+  }
+
+// CRAWL 1
+  crawl_LOAD_1 () {
+    return '0 SCENE*TV3_FAKTOR/PLAYOUT/CRAWL_VIDEO_BACK LOAD\0'
+  }
+  crawl_IN_1 () {
+    return '0 RENDERER*FRONT_LAYER SET_OBJECT SCENE*TV3_FAKTOR/PLAYOUT/CRAWL_VIDEO_BACK\0' + 
+           '0 RENDERER*FRONT_LAYER*STAGE*DIRECTOR*$CRAWL_VIDEO_BACK_IN START\0' +
+           '0 RENDERER*FRONT_LAYER*TREE*$CRAWL_VIDEO_BACK*KEY*DRAW_KEY SET 1 \0'
+  }
+  crawl_SetText_1 (text) {
+    return `0 RENDERER*FRONT_LAYER*TREE*$DEXTER_CRAWL_1*GEOM*text SET <SET Text "${text }">$Text\0` 
+  }
+  crawl_BUILD_1 () {
+    return '0 RENDERER*FRONT_LAYER*TREE*$DEXTER_CRAWL_1*GEOM*build INVOKE\0'
+  }
+  crawl_UPDATE_1 () {
+    return '0 RENDERER*FRONT_LAYER*TREE*$DEXTER_CRAWL_1*GEOM*update INVOKE\0'
+  }
+  crawl_START_1  () {
+    return '0 RENDERER*FRONT_LAYER*TREE*$DEXTER_CRAWL_1*GEOM*start INVOKE\0'
+  }
+  crawl_CONTINUE_1 () {
+    return '0 RENDERER*FRONT_LAYER*TREE*$DEXTER_CRAWL_1*GEOM*cont INVOKE\0'
+  }
+  crawl_STOP_1 () {
+    return '0 RENDERER*FRONT_LAYER*TREE*$DEXTER_CRAWL_1*GEOM*stop INVOKE\0'
+  }
+  crawl_OUT_1 () {
+    return '0 RENDERER*FRONT_LAYER*STAGE*DIRECTOR*$CRAWL_VIDEO_BACK_OUT START\0'
+  }
+
+
+
+  pasice_IN () {
+    return '0 RENDERER SET_OBJECT SCENE*TV3_FAKTOR/PLAYOUT/PASICE\0' +
+           '0 RENDERER*TREE*$PASICE*KEY*DRAW_KEY SET 1 \0'
+  }
+  tema_IN = (text) => {
+    return (
+      '0 RENDERER SET_OBJECT SCENE*TV3_FAKTOR/PLAYOUT/PASICE\0'+
+      '0 RENDERER*TREE*$PASICE*KEY*DRAW_KEY SET 1 \0' +
+      '0 RENDERER*STAGE*DIRECTOR*$TEMA_IN START\0' +
+      `0 RENDERER*TREE*$TEMA_TXT*GEOM*TEXT SET ${text }\0`
+    )
+  } 
+  tema_OUT = () => {
+    return '0 RENDERER*STAGE*DIRECTOR*$TEMA_OUT START\0'
+  }
+
+  podpis_IN = (text) => {
+    return (
+      '0 RENDERER SET_OBJECT SCENE*TV3_FAKTOR/PLAYOUT/PASICE\0' +
+      '0 RENDERER*TREE*$PASICE*KEY*DRAW_KEY SET 1 \0' +
+      '0 RENDERER*STAGE*DIRECTOR*$PODPIS_IN START\0' +
+      `0 RENDERER*TREE*$PODPIS_TXT*GEOM*TEXT SET ${text}\0`
+    )
+  }        
+  podpis_OUT = () => {
+    return '0 RENDERER*STAGE*DIRECTOR*$PODPIS_OUT START\0'
+  }
+  podpis_triplex_IN = (text) => {
+    return (
+      '0 RENDERER SET_OBJECT SCENE*TV3_FAKTOR/PLAYOUT/PASICE\0' +
+      '0 RENDERER*TREE*$PASICE*KEY*DRAW_KEY SET 1 \0' +
+      '0 RENDERER*STAGE*DIRECTOR*$PODPIS_3_IN START\0' +
+      `0 RENDERER*TREE*$NAME_1*GEOM*TEXT SET ${text[0]}\0` +
+      `0 RENDERER*TREE*$NAME_2*GEOM*TEXT SET ${text[1]}\0` +
+      `0 RENDERER*TREE*$NAME_3*GEOM*TEXT SET ${text[2]}\0`
+    )
+  }        
+  podpis_triplex_OUT = () => {
+    return '0 RENDERER*STAGE*DIRECTOR*$PODPIS_3_OUT START\0'
+  }
+}

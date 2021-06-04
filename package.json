@@ -1,6 +1,6 @@
 {
-  "name": "TV3_VREME",
-  "productName": "TV3_VREME",
+  "name": "am_election",
+  "productName": "am_election",
   "version": "0.18.1",
   "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
   "scripts": {
@@ -56,7 +56,7 @@
     ]
   },
   "build": {
-    "productName": "TV3_VREME",
+    "productName": "am_election",
     "appId": "",
     "files": [
       "dist/",
@@ -110,8 +110,8 @@
     "url": "git+https://github.com/electron-react-boilerplate/electron-react-boilerplate.git"
   },
   "author": {
-    "name": "Marija Crvenkovska",
-    "email": "marija.crvenkovska@vpk.si",
+    "name": "Klemen Lampret",
+    "email": "",
     "url": "https://electron-react-boilerplate.js.org"
   },
   "contributors": [
